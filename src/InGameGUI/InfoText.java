@@ -1,4 +1,4 @@
-package GameGUI;
+package InGameGUI;
 
 import Configuration.AppConfiguration;
 
@@ -6,19 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ResourceBundle;
 
-import static GameGUI.Constants.TEXT_FIELD_FONT_SIZE;
-import static GameGUI.Constants.TEXT_FIELD_HEIGHT;
+import static InGameGUI.Constants.TEXT_FIELD_FONT_SIZE;
+import static InGameGUI.Constants.TEXT_FIELD_HEIGHT;
 
 /**
  * This class represents JTextField with the information about lives, time left, etc.
  */
-public class GameInfoText {
+public class InfoText {
     private JTextField textField;
 
     /**
      * Creating JTextField and setting its parameters
      */
-    public GameInfoText() {
+    public InfoText() {
         textField = new JTextField();
         final int frameWidth = Integer.valueOf(AppConfiguration.getInstance().getProperties().getProperty("panelWidth"));
         setTextFieldParameters(textField, frameWidth);

@@ -1,4 +1,4 @@
-package GameGUI;
+package InGameGUI;
 
 /**
  * Class in which we define every constant related to the game's GUI.

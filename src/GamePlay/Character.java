@@ -5,7 +5,7 @@ import Configuration.*;
 /**
  * This class contains parameters of our character (position, color and sizes)
  */
-public class GameCharacter {
+public class Character {
     /**
      * Position of the center of our character on the X axis - in pixels
      */
@@ -20,7 +20,7 @@ public class GameCharacter {
      *
      * @param levelConfiguration contains configuration of the level
      */
-    public GameCharacter(LevelConfiguration levelConfiguration) {
+    public Character(LevelConfiguration levelConfiguration) {
         positionX = levelConfiguration.getCharacterXStartPosition();
         positionY = levelConfiguration.getCharacterYStartPosition();
     }

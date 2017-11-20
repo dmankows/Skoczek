@@ -1,9 +1,10 @@
-import GameGUI.GameFrame;
-import GameGUI.GameInfoText;
-import GameGUI.GamePanel;
+import GamePlay.Board;
+import GamePlay.Character;
+import InGameGUI.Frame;
+import InGameGUI.InfoText;
+import InGameGUI.Panel;
 import Configuration.AppConfiguration;
 import Configuration.LevelConfiguration;
-import GamePlay.GameCharacter;
 
 import java.awt.*;
 import java.util.Locale;
@@ -17,13 +18,14 @@ public class Main {
         setLanguage();
         LevelConfiguration levelConfiguration = new LevelConfiguration();       // load level configuration
 
-        GameCharacter gameCharacter = new GameCharacter(levelConfiguration);
-        GameFrame gameFrame = new GameFrame();                                  // create application's window
-        GamePanel gamePanel = new GamePanel(levelConfiguration, gameCharacter);
-        gameFrame.addComponent(gamePanel.getPanel(), BorderLayout.SOUTH);
+        Character character = new Character(levelConfiguration);
+        Board board = new Board(levelConfiguration);
+        Frame gameFrame = new Frame();                                          // create application's window
+        Panel panel = new Panel(levelConfiguration, character);
+        gameFrame.addComponent(panel.getPanel(), BorderLayout.SOUTH);
 
-        GameInfoText gameInfoText = new GameInfoText();
-        gameFrame.addComponent(gameInfoText.getTextField(), BorderLayout.NORTH);
+        InfoText infoText = new InfoText();
+        gameFrame.addComponent(infoText.getTextField(), BorderLayout.NORTH);
         gameFrame.showWindow();
     }
 

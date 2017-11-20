@@ -98,7 +98,7 @@ public class LevelConfiguration {
 
         numberOfRows = loadDimensionOfArray("numberOfRows", levelProperties, levelConfigFilePath);
         numberOfColumns = loadDimensionOfArray("numberOfColumns", levelProperties, levelConfigFilePath);
-        blockStrokeWidth = loadStrokeWidth("blockStrokeWidth");
+        blockStrokeWidth = loadStrokeWidth();
 
         blockColor = loadColor("blockColor", levelProperties, levelConfigFilePath);
         strokeColor = loadColor("strokeColor", levelProperties, levelConfigFilePath);
@@ -133,7 +133,7 @@ public class LevelConfiguration {
         } catch (Exception e) {
             System.err.println("Can't get proper value of stroke's width! Setting default value...");
             e.printStackTrace();
-            value = GameGUI.Constants.DEFAULT_PANEL_SIZE;
+            value = InGameGUI.Constants.DEFAULT_PANEL_SIZE;
         }
         return value;
     }
@@ -141,17 +141,16 @@ public class LevelConfiguration {
     /**
      * Loads blockStrokeWidth from AppConfiguration file
      *
-     * @param key defines the key under which we are looking for the value
      * @return the value of block's stroke width
      */
-    private float loadStrokeWidth(String key) {
+    private float loadStrokeWidth() {
         float strokeWidth;
         try {
-            strokeWidth = Float.parseFloat(AppConfiguration.getInstance().getProperties().getProperty(key));
+            strokeWidth = Float.parseFloat(AppConfiguration.getInstance().getProperties().getProperty("blockStrokeWidth"));
         } catch (Exception e) {
             System.err.println("Can't get proper value of stroke's width! Setting default value...");
             e.printStackTrace();
-            strokeWidth = GameGUI.Constants.DEFAULT_STROKE_WIDTH;
+            strokeWidth = InGameGUI.Constants.DEFAULT_STROKE_WIDTH;
         }
         return strokeWidth;
     }
