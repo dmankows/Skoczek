@@ -15,13 +15,14 @@ public class Main {
 
     public static void main(String[] args) {
         setLanguage();
-        LevelConfiguration levelConfiguration = new LevelConfiguration();    // load level configuration
+        LevelConfiguration levelConfiguration = new LevelConfiguration();       // load level configuration
 
         GameCharacter gameCharacter = new GameCharacter(levelConfiguration);
-        GameFrame gameFrame = new GameFrame();     // create application's window
-        GamePanel gamePanel = new GamePanel(levelConfiguration);
-        GameInfoText gameInfoText = new GameInfoText();
+        GameFrame gameFrame = new GameFrame();                                  // create application's window
+        GamePanel gamePanel = new GamePanel(levelConfiguration, gameCharacter);
         gameFrame.addComponent(gamePanel.getPanel(), BorderLayout.SOUTH);
+
+        GameInfoText gameInfoText = new GameInfoText();
         gameFrame.addComponent(gameInfoText.getTextField(), BorderLayout.NORTH);
         gameFrame.showWindow();
     }

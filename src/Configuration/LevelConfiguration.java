@@ -61,11 +61,11 @@ public class LevelConfiguration {
     /**
      * Block's height - in pixels
      */
-    private double blockHeight;
+    private int blockHeight;
     /**
      * Block's width - in pixels
      */
-    private double blockWidth;
+    private int blockWidth;
     /**
      * Block's stroke width - in pixels
      */
@@ -73,11 +73,11 @@ public class LevelConfiguration {
     /**
      * Character's size - width in pixels
      */
-    private double characterWidth;
+    private int characterWidth;
     /**
      * Character's size - height in pixels
      */
-    private double characterHeight;
+    private int characterHeight;
     /**
      * JPanel's width - in pixels
      */
@@ -110,11 +110,14 @@ public class LevelConfiguration {
 
         gamePanelWidth = loadPanelDimension("panelWidth");
         gamePanelHeight = loadPanelDimension("panelHeight");
-        blockWidth = (double) gamePanelWidth / numberOfColumns;
-        blockHeight = (double) gamePanelHeight / numberOfRows;
+        blockWidth = gamePanelWidth / numberOfColumns;
+        blockHeight = gamePanelHeight / numberOfRows;
 
         characterWidth = blockWidth / 2;
         characterHeight = blockHeight / 2;
+
+        characterXStartPosition = characterXStartPosition * blockWidth + blockWidth / 4;
+        characterYStartPosition = characterYStartPosition * blockHeight + blockHeight / 2 - (int) blockStrokeWidth;
     }
 
     /**
@@ -215,8 +218,8 @@ public class LevelConfiguration {
                     blocksArray[i][j] = BoardElements.BLOCK;
                 } else {  // value.charAt(j) == '*'
                     blocksArray[i][j] = BoardElements.CHARACTER;
-                    characterXStartPosition = i;
-                    characterYStartPosition = j;
+                    characterXStartPosition = j;
+                    characterYStartPosition = i;
                 }
             }
         }
@@ -225,8 +228,8 @@ public class LevelConfiguration {
             System.err.println("Incorrect " + levelConfigFilePath + " file - missing '*' character!");
             System.exit(1);
         }
-
     }
+
     /**
      * This method gets the {@code whichColor} from {@code levelProperties} and checks if this is a valid color's name.
      * If it is - then the variable of type Color is returned.
@@ -316,7 +319,6 @@ public class LevelConfiguration {
         }
     }
 
-
     /* GETTERS */
 
     public Color getBackgroundColor() {
@@ -340,7 +342,7 @@ public class LevelConfiguration {
         return blockStrokeWidth;
     }
 
-    public double getBlockWidth() {
+    public int getBlockWidth() {
         return blockWidth;
     }
 
@@ -348,20 +350,20 @@ public class LevelConfiguration {
         return characterColor;
     }
 
-    public double getCharacterHeight() {
+    public int getCharacterHeight() {
         return characterHeight;
     }
 
-    public double getCharacterWidth() {
+    public int getCharacterWidth() {
         return characterWidth;
-    }
-
-    public int getCharacterYStartPosition() {
-        return characterYStartPosition;
     }
 
     public int getCharacterXStartPosition() {
         return characterXStartPosition;
+    }
+
+    public int getCharacterYStartPosition() {
+        return characterYStartPosition;
     }
 
     public int getGamePanelHeight() {

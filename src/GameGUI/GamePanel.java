@@ -4,6 +4,7 @@ import Configuration.*;
 import GamePlay.GameCharacter;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.*;
 
@@ -14,7 +15,7 @@ public class GamePanel {
 
     private JPanel panel;
 
-    public GamePanel(LevelConfiguration levelConfiguration) {
+    public GamePanel(LevelConfiguration levelConfiguration, GameCharacter gameCharacter) {
         int gamePanelWidth = levelConfiguration.getGamePanelWidth();
         int gamePanelHeight = levelConfiguration.getGamePanelHeight();
 
@@ -22,8 +23,8 @@ public class GamePanel {
             @Override
             public void paint(Graphics g) {
                 super.paintComponent(g);
-                drawRectangles(g, gamePanelHeight, gamePanelWidth, levelConfiguration);
-                drawCharacter(g, gamePanelHeight, gamePanelWidth, levelConfiguration);
+                drawRectangles(g, levelConfiguration);
+                drawCharacter(g, levelConfiguration, gameCharacter);
             }
         };
         panel.setLayout(new FlowLayout());
@@ -34,12 +35,9 @@ public class GamePanel {
     /**
      * Calculate block's width and height, draw rectangles in the proper positions
      *
-     * @param g               object that we use to draw rectangles
-     * @param gamePanelHeight panel's height
-     * @param gamePanelWidth  panel's width
+     * @param g object that we use to draw rectangles
      */
-    private void drawRectangles(Graphics g, int gamePanelHeight, int gamePanelWidth, LevelConfiguration
-            levelConfiguration) {
+    private void drawRectangles(Graphics g, LevelConfiguration levelConfiguration) {
         int numberOfColumns = levelConfiguration.getNumberOfColumns();
         int numberOfRows = levelConfiguration.getNumberOfRows();
         BoardElements[][] blocksArray = levelConfiguration.getBlocksArray(); // TODO zmienic to na level - klasa z levelcfg
@@ -52,8 +50,6 @@ public class GamePanel {
         Color strokeColor = levelConfiguration.getStrokeColor();
 
         Graphics2D g2d = (Graphics2D) g;
-        // turn on anti-aliasing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Rectangle2D rectangle;
 
         // drawing rectangles, based upon the information from blocksArray
@@ -72,14 +68,17 @@ public class GamePanel {
         }
     }
 
-    private void drawCharacter(Graphics g, int gamePanelHeight, int gamePanelWidth, GameCharacter gameCharacter,
-                               LevelConfiguration levelConfiguration){
+    private void drawCharacter(Graphics g, LevelConfiguration levelConfiguration, GameCharacter gameCharacter) {
         Graphics2D g2d = (Graphics2D) g;
+
+        Ellipse2D.Double circle = new Ellipse2D.Double(gameCharacter.getPositionX(), gameCharacter.getPositionY(),
+                levelConfiguration.getCharacterWidth(), levelConfiguration.getCharacterHeight());
+        g2d.setColor(levelConfiguration.getCharacterColor());
+
         // turn on anti-aliasing
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Rectangle2D rectangle;
-
-
+        g2d.fill(circle);
+        g2d.draw(circle);
     }
 
     public JPanel getPanel() {
