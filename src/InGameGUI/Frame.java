@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
  */
 public class Frame {
 
+    /**
+     * Our JFrame - application's main window
+     */
     private JFrame frame;
 
     /**
@@ -61,6 +64,4 @@ public class Frame {
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon.png"));
         frame.setResizable(false);
     }
-
-
 }

@@ -37,6 +37,7 @@ public class AppConfiguration {
 
     /**
      * Loads the file from {@code appConfigurationPath}, checks for potential errors and returns it
+     *
      * @param appConfigurationPath path to the application's configuration file
      * @return File "paired" with {@code appConfigurationPath} - .xml file
      */
@@ -73,9 +74,10 @@ public class AppConfiguration {
 
     /**
      * Loads property {@code whatProperty} from {@code doc} into {@code properties} object
+     *
      * @param whatProperty string that defines what property we want to get from Document doc
-     * @param doc this variable keeps the data loaded from res/ApplicationConfig.xml file
-     * @param properties {@code whatProperty} from {@code doc} is loaded to this variable
+     * @param doc          this variable keeps the data loaded from res/ApplicationConfig.xml file
+     * @param properties   {@code whatProperty} from {@code doc} is loaded to this variable
      */
     private void loadProperty(String whatProperty, Document doc, Properties properties) {
 
@@ -91,7 +93,8 @@ public class AppConfiguration {
 
     /**
      * This method parses data from {@code file} and loads into the variable of type Document - and then returns it
-     * @param file from this file the data is read
+     *
+     * @param file       from this file the data is read
      * @param configPath contains path to the configuration file - needed only for a proper message in case of
      *                   occurrence of an error
      * @return Variable of type Document with loaded and parsed data from {@code file}

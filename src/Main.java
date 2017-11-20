@@ -10,23 +10,23 @@ import java.awt.*;
 import java.util.Locale;
 
 /**
- * Main class - set language, load configuration, start app's window
+ * Main class - set language, load configuration, show app's window
  */
 public class Main {
 
     public static void main(String[] args) {
         setLanguage();
-        LevelConfiguration levelConfiguration = new LevelConfiguration();       // load level configuration
+        LevelConfiguration levelConfiguration = new LevelConfiguration();    // load level configuration
 
         Character character = new Character(levelConfiguration);
         Board board = new Board(levelConfiguration);
-        Frame gameFrame = new Frame();                                          // create application's window
-        Panel panel = new Panel(levelConfiguration, character);
-        gameFrame.addComponent(panel.getPanel(), BorderLayout.SOUTH);
+        Frame frame = new Frame();                                          // create application's window
+        Panel panel = new Panel(levelConfiguration, character, board);      // create panel and draw board and character
+        frame.addComponent(panel.getPanel(), BorderLayout.SOUTH);
 
-        InfoText infoText = new InfoText();
-        gameFrame.addComponent(infoText.getTextField(), BorderLayout.NORTH);
-        gameFrame.showWindow();
+        InfoText infoText = new InfoText();                                 // create text field above the panel
+        frame.addComponent(infoText.getTextField(), BorderLayout.NORTH);
+        frame.showWindow();
     }
 
     /**

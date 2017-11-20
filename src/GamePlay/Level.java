@@ -1,6 +1,8 @@
 package GamePlay;
 
-// TODO ta klasa bedzie zawierac obiekty plansza (Board) i postac (Character)
+/**
+ * for now ignore this class
+ */
 public class Level {
     private Character character;
     private Board board;

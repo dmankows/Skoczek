@@ -1,6 +1,7 @@
 package InGameGUI;
 
 import Configuration.*;
+import GamePlay.Board;
 import GamePlay.Character;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public class Panel {
 
     private JPanel panel;
 
-    public Panel(LevelConfiguration levelConfiguration, Character character) {
+    public Panel(LevelConfiguration levelConfiguration, Character character, Board board) {
         int gamePanelWidth = levelConfiguration.getGamePanelWidth();
         int gamePanelHeight = levelConfiguration.getGamePanelHeight();
 
@@ -23,7 +24,7 @@ public class Panel {
             @Override
             public void paint(Graphics g) {
                 super.paintComponent(g);
-                drawRectangles(g, levelConfiguration);
+                drawRectangles(g, levelConfiguration, board);
                 drawCharacter(g, levelConfiguration, character);
             }
         };
@@ -33,14 +34,34 @@ public class Panel {
     }
 
     /**
+     * Draws circle on our JPanel
+     *
+     * @param g                  object that we use to draw our character
+     * @param levelConfiguration object that contains information about the current level
+     * @param character          our character
+     */
+    private void drawCharacter(Graphics g, LevelConfiguration levelConfiguration, Character character) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        Ellipse2D.Double circle = new Ellipse2D.Double(character.getPositionX(), character.getPositionY(),
+                levelConfiguration.getCharacterWidth(), levelConfiguration.getCharacterHeight());
+        g2d.setColor(levelConfiguration.getCharacterColor());
+
+        // turn on anti-aliasing
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.fill(circle);
+        g2d.draw(circle);
+    }
+
+    /**
      * Calculate block's width and height, draw rectangles in the proper positions
      *
      * @param g object that we use to draw rectangles
      */
-    private void drawRectangles(Graphics g, LevelConfiguration levelConfiguration) {
+    private void drawRectangles(Graphics g, LevelConfiguration levelConfiguration, Board board) {
         int numberOfColumns = levelConfiguration.getNumberOfColumns();
         int numberOfRows = levelConfiguration.getNumberOfRows();
-        BoardElements[][] blocksArray = levelConfiguration.getBlocksArray(); // TODO zmienic to na level - klasa z levelcfg
+        BoardElements[][] blocksArray = board.getBlocksArray();
 
         final double BLOCK_HEIGHT = levelConfiguration.getBlockHeight();
         final double BLOCK_WIDTH = levelConfiguration.getBlockWidth();
@@ -68,18 +89,7 @@ public class Panel {
         }
     }
 
-    private void drawCharacter(Graphics g, LevelConfiguration levelConfiguration, Character character) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        Ellipse2D.Double circle = new Ellipse2D.Double(character.getPositionX(), character.getPositionY(),
-                levelConfiguration.getCharacterWidth(), levelConfiguration.getCharacterHeight());
-        g2d.setColor(levelConfiguration.getCharacterColor());
-
-        // turn on anti-aliasing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.fill(circle);
-        g2d.draw(circle);
-    }
+    /* GETTERS */
 
     public JPanel getPanel() {
         return panel;
