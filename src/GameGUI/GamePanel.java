@@ -50,6 +50,7 @@ public class GamePanel {
         Color strokeColor = levelConfiguration.getStrokeColor();
 
         Graphics2D g2d = (Graphics2D) g;
+        //
         Rectangle2D rectangle;
 
         // drawing rectangles, based upon the information from blocksArray
