@@ -53,10 +53,13 @@ public class Panel {
         g2d.draw(circle);
     }
 
+
     /**
      * Calculate block's width and height, draw rectangles in the proper positions
      *
-     * @param g object that we use to draw rectangles
+     * @param g                  object that we use to draw rectangles
+     * @param levelConfiguration object that contains information about the current level
+     * @param board              object that represents our board - contains information about setup of the blocks
      */
     private void drawRectangles(Graphics g, LevelConfiguration levelConfiguration, Board board) {
         int numberOfColumns = levelConfiguration.getNumberOfColumns();
