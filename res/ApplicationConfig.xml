@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<class>
-    <panelWidth>900</panelWidth>
-    <panelHeight>600</panelHeight>
-    <blockStrokeWidth>1.0f</blockStrokeWidth>
-    <appLanguage>polish</appLanguage>
-    <levelConfigFilePath>res/LevelConfig.ini</levelConfigFilePath>
-</class>
